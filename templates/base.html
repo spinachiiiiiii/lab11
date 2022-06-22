@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+<header class="p-3 text-dark top-0" style="z-index: 1">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <div class="text-left">
+                <ul class="nav col-12 col-lg-auto mb-2 justify-content-start mb-md-0 float-md-end">
+                        <li class="h5"><a href="{{url_for('main')}}" class="nav-link px-2 text-dark">Головна</a></li>
+                        <li class="h5"><a href="{{url_for('about')}}" class="nav-link px-2 text-dark">Про проект</a></li>
+                        <li class="h5"><a href="{{url_for('history')}}" class="nav-link px-2 text-dark">Історія гурту</a></li>
+                        <li class="h5"><a href="{{url_for('albums')}}" class="nav-link px-2 text-dark">Альбоми</a></li>
+                 </ul>
+            </div>
+
+            {% if not 'users' in session %}
+                <div class="text-end">
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-dark me-2">Увійти</a>
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-warning">Створити акаунт</a>
+                </div>
+            {% endif %}
+
+            {% if 'users' in session %}
+                <div class="text-end">
+                    <a href="{{ url_for('createAlbum') }}" class="btn btn-outline-warning" style="width: 140px; margin-right: 10px">Додати альбом</a>
+                    <a href="{{ url_for('exit') }}" class="btn btn-outline-danger" style="width: 70px">Вийти</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+  </header>
+
+{% block body %}
+
+{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>
